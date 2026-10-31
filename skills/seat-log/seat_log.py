@@ -547,7 +547,8 @@ def selftest() -> int:
 
     knobs = ("SEAT_LOG_DIR", "SEAT_LOG_PROJECTS", "SEAT_LOG_APPDIR", "SEAT_LOG_TOAST")
     saved = {k: os.environ.get(k) for k in knobs}
-    tmp = Path(tempfile.mkdtemp(prefix="seat-log-test-"))
+    tmp_dir = tempfile.TemporaryDirectory(prefix="seat-log-test-", ignore_cleanup_errors=True)
+    tmp = Path(tmp_dir.name)
     log, proj = tmp / "log", tmp / "projects" / "C--proj"
     proj.mkdir(parents=True)
     os.environ.update(SEAT_LOG_DIR=str(log), SEAT_LOG_PROJECTS=str(tmp / "projects"), SEAT_LOG_APPDIR=str(tmp / "app"),
@@ -733,6 +734,8 @@ def selftest() -> int:
                 os.environ.pop(k, None)
             else:
                 os.environ[k] = v
+        tmp_dir.cleanup()
+    check(not tmp.exists(), "the selftest's temp folder is gone after the run")
 
     total = ok + fail
     print(f"seat_log selftest: {total} cases, " + ("all passed" if not fail else f"{fail} FAILED"))

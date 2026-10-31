@@ -44,4 +44,5 @@ app's session records, for titles on Windows), `SEAT_LOG_TOAST`.
 
 `python seat_log.py selftest`: the direction table, the seat and tail reads, each event kind with its message and
 notification, the suggestion patterns and their dedupe, the error path, the report's sections and its JSON, and the
-file's own form: 53 cases, under two seconds, nothing read from the live machine and no notification shown.
+file's own form, and its own temp folder gone at the end: 54 cases, under two seconds, nothing read from the live
+machine, no notification shown and nothing left in the temp folder.

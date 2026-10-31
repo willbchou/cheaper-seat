@@ -78,7 +78,7 @@ sessions that ran on more than one seat.
 
 It installs as a folder under `~/.claude/skills`: copy `skills/seat-log` to `~/.claude/skills/seat-log`, run its
 selftest there, then add the hook to `~/.claude/settings.json`. The selftest reads nothing from the live machine and
-should end with "seat_log selftest: 53 cases, all passed".
+should end with "seat_log selftest: 54 cases, all passed".
 
     python seat_log.py selftest
 
